@@ -1,25 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.Canvas?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 
-<BorderPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vervyle.lw4_oop.PaintController">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-                  <MenuItem fx:id="menu_save" mnemonicParsing="false" text="Save" />
-              <MenuItem fx:id="menu_exit" mnemonicParsing="false" text="Exit" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
-   <center>
-      <Canvas height="600.0" width="600.0" BorderPane.alignment="CENTER" />
-   </center>
-</BorderPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vervyle.lw4_oop.PaintController">
+   <children>
+      <VBox>
+         <children>
+            <MenuBar>
+               <menus>
+                  <Menu mnemonicParsing="false" text="File">
+                     <items>
+                        <MenuItem fx:id="menu_save" mnemonicParsing="false" text="Save" />
+                        <MenuItem fx:id="menu_exit" mnemonicParsing="false" text="Exit" />
+                     </items>
+                  </Menu>
+               </menus>
+            </MenuBar>
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
+               <items>
+                  <Label text="Radius:" />
+                  <TextField fx:id="tool_radius" prefHeight="30.0" prefWidth="30.0" text="10" />
+                  <ColorPicker fx:id="tool_color">
+                     <value>
+                        <Color />
+                     </value></ColorPicker>
+                  <CheckBox fx:id="ctrl_enable" mnemonicParsing="false" text="Включить CTRL" />
+                  <CheckBox fx:id="set_enable" mnemonicParsing="false" text="Выделять пересечение" />
+               </items>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets top="10.0" />
+               </opaqueInsets>
+            </ToolBar>
+         </children>
+      </VBox>
+      <ScrollPane fx:id="scroll_pane" prefHeight="2000.0" prefWidth="2000.0">
+        <content>
+          <AnchorPane fx:id="main_pane" minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="2000.0" />
+        </content>
+      </ScrollPane>
+   </children>
+</VBox>
