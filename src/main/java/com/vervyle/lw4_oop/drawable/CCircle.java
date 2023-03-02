@@ -32,7 +32,7 @@ public class CCircle {
     }
 
     public boolean select(MouseEvent mouseEvent) {
-        if (checkLocation(mouseEvent)) {
+        if (checkLocation(mouseEvent) && !isSelected) {
             select();
             return true;
         }

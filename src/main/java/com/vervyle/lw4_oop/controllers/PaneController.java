@@ -1,5 +1,6 @@
-package com.vervyle.lw4_oop;
+package com.vervyle.lw4_oop.controllers;
 
+import com.vervyle.lw4_oop.Container;
 import com.vervyle.lw4_oop.drawable.CCircle;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -9,7 +10,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PaneController implements PaneManager {
+public class PaneController {
 
     private final AnchorPane pane;
     private final Container container;
@@ -19,7 +20,6 @@ public class PaneController implements PaneManager {
         container = new Container();
     }
 
-    @Override
     public void selectAll(MouseEvent mouseEvent) {
         Iterator<CCircle> iterator = container.getAll().iterator();
         iterator.forEachRemaining(cCircle -> {
@@ -27,27 +27,26 @@ public class PaneController implements PaneManager {
         });
     }
 
-    @Override
-    public void selectOne(MouseEvent mouseEvent) {
+    public boolean selectOne(MouseEvent mouseEvent) {
         LinkedList<CCircle> list = new LinkedList<>(container.getAll());
         Iterator<CCircle> iterator = list.descendingIterator();
         while (iterator.hasNext()) {
             if (iterator.next().select(mouseEvent))
-                return;
+                return true;
         }
+        return false;
     }
 
-    private void selectLastCreated() {
+    public void selectLastCreated() {
         CCircle cCircle = container.getLast();
         if (cCircle != null) cCircle.select();
     }
 
-    private void deselectAll() {
+    public void deselectAll() {
         Iterator<CCircle> iterator = container.getAll().iterator();
         iterator.forEachRemaining(CCircle::deselect);
     }
 
-    @Override
     public void addCircle(MouseEvent mouseEvent, double radius, Color color) {
         deselectAll();
         CCircle circle = new CCircle(
@@ -60,7 +59,6 @@ public class PaneController implements PaneManager {
         circle.paint();
     }
 
-    @Override
     public void delete() {
         Iterator<CCircle> iterator = container.getAll().listIterator();
         List<CCircle> toDelete = new LinkedList<>();
