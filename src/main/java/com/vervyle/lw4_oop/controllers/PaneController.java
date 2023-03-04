@@ -53,8 +53,8 @@ public class PaneController {
                 mouseEvent.getX(),
                 mouseEvent.getY(),
                 radius,
-                color,
-                pane);
+                pane,
+                color);
         container.add(circle);
         circle.paint();
     }
