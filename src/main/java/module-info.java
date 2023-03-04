@@ -9,4 +9,6 @@ module com.vervyle.lw4_oop {
     opens com.vervyle.lw4_oop.controllers to javafx.fxml;
     exports com.vervyle.lw4_oop.controllers.states;
     opens com.vervyle.lw4_oop.controllers.states to javafx.fxml;
+    exports com.vervyle.lw4_oop.containers;
+    opens com.vervyle.lw4_oop.containers to javafx.fxml;
 }
