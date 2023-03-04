@@ -20,6 +20,14 @@ public class PaneController {
         container = new Container();
     }
 
+    public boolean anyFit(MouseEvent mouseEvent) {
+        for (CCircle circle : container.getAll()) {
+            if (circle.checkLocation(mouseEvent))
+                return true;
+        }
+        return false;
+    }
+
     public void selectAll(MouseEvent mouseEvent) {
         Iterator<CCircle> iterator = container.getAll().iterator();
         iterator.forEachRemaining(cCircle -> {

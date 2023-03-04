@@ -40,8 +40,11 @@ public class PaintController implements Initializable {
     }
 
     private void mouseClickedHandler(MouseEvent mouseEvent) {
-        if (!workspace.selectElement(mouseEvent))
+        if (!workspace.anyFit(mouseEvent)) {
             workspace.addElement(mouseEvent);
+            return;
+        }
+        workspace.selectElement(mouseEvent);
     }
 
     private void keyPressedHandler(KeyEvent keyEvent) {

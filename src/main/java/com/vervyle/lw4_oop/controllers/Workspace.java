@@ -25,6 +25,10 @@ public class Workspace {
         state = DEFAULT_STATE;
     }
 
+    public boolean anyFit(MouseEvent mouseEvent) {
+        return paneController.anyFit(mouseEvent);
+    }
+
     public void addElement(MouseEvent mouseEvent) {
         paneController.addCircle(mouseEvent, Double.parseDouble(tool_radius.getText()), tool_color.getValue());
     }
