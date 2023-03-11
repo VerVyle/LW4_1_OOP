@@ -5,15 +5,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class CCircle extends Element{
+public class CCircle extends Element {
 
     private final double radius;
 
     @Override
     public boolean checkLocation(MouseEvent mouseEvent) {
-        if (x <= mouseEvent.getX() + radius && mouseEvent.getX() <= x + radius)
-            return y <= mouseEvent.getY() + radius && mouseEvent.getY() <= y + radius;
-        return false;
+        return ((Math.pow(mouseEvent.getX() - x, 2) + Math.pow(mouseEvent.getY() - y, 2)) <= Math.pow(radius, 2));
     }
 
     public CCircle(double x, double y, double radius, AnchorPane pane, Color color) {
