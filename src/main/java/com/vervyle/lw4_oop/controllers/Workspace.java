@@ -25,8 +25,8 @@ public class Workspace {
         state = DEFAULT_STATE;
     }
 
-    public boolean anyFit(MouseEvent mouseEvent) {
-        return paneController.anyFit(mouseEvent);
+    public boolean anyFit(double x, double y) {
+        return paneController.anyFit(x, y);
     }
 
     public void addElement(MouseEvent mouseEvent) {

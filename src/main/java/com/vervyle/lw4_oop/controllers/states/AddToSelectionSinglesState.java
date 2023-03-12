@@ -12,7 +12,7 @@ public class AddToSelectionSinglesState implements WorkspaceState {
         if (!mouseEvent.isControlDown()) {
             DEFAULT_STATE.selectElement(paneController, mouseEvent);
         }
-        return paneController.selectOne(mouseEvent);
+        return paneController.selectOne(mouseEvent.getX(), mouseEvent.getY());
     }
 
     static {

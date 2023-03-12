@@ -10,8 +10,8 @@ public class CCircle extends Element {
     private final double radius;
 
     @Override
-    public boolean checkLocation(MouseEvent mouseEvent) {
-        return ((Math.pow(mouseEvent.getX() - x, 2) + Math.pow(mouseEvent.getY() - y, 2)) <= Math.pow(radius, 2));
+    public boolean checkLocation(double x, double y) {
+        return ((Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2)) <= Math.pow(radius, 2));
     }
 
     public CCircle(double x, double y, double radius, AnchorPane pane, Color color) {

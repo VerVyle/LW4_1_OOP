@@ -4,33 +4,37 @@ import javafx.event.ActionEvent;
 import javafx.event.EventDispatchChain;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PaintController implements Initializable {
+    private Workspace workspace;
     @FXML
     private AnchorPane main_pane;
     @FXML
-    private MenuItem menu_exit;
+    private CheckBox tool_ctrl_enable;
     @FXML
-    private MenuItem menu_save;
+    private ListView<String> tool_element_list;
     @FXML
-    private ColorPicker tool_color;
+    private CheckBox tool_groups_enable;
     @FXML
-    private TextField tool_radius;
+    private Label tool_mouse_location;
     @FXML
-    private CheckBox ctrl_enable;
+    private Label tool_pane_size;
     @FXML
-    private CheckBox set_enable;
+    private Button tool_scale_minus;
     @FXML
-    private ScrollPane scroll_pane;
-    private Workspace workspace;
+    private Button tool_scale_plus;
 
     private void onSave(ActionEvent actionEvent) {
 
@@ -41,7 +45,7 @@ public class PaintController implements Initializable {
     }
 
     private void mouseClickedHandler(MouseEvent mouseEvent) {
-        if (!workspace.anyFit(mouseEvent)) {
+        if (!workspace.anyFit(mouseEvent.getX(), mouseEvent.getY())) {
             workspace.addElement(mouseEvent);
             return;
         }
@@ -53,47 +57,63 @@ public class PaintController implements Initializable {
             workspace.deleteSelectedElements();
     }
 
-    private void workspaceInit() {
-        workspace = new Workspace(main_pane, tool_color, tool_radius);
-        ctrl_enable.selectedProperty().addListener((observableValue, oldVal, newVal) -> {
-            if (newVal && set_enable.isSelected()) {
-                workspace.setState(Workspace.ADD_TO_SELECTION_INTERSECTIONS_STATE);
-                return;
-            }
-            if (newVal && !set_enable.isSelected()) {
-                workspace.setState(Workspace.ADD_TO_SELECTION_SINGLES_STATE);
-                return;
-            }
-            if (oldVal && set_enable.isSelected()) {
-                workspace.setState(Workspace.SELECT_INTERSECTIONS_STATE);
-                return;
-            }
-            workspace.setState(Workspace.DEFAULT_STATE);
-        });
-        set_enable.selectedProperty().addListener((observableValue, oldVal, newVal) -> {
-            if (newVal && ctrl_enable.isSelected()) {
-                workspace.setState(Workspace.ADD_TO_SELECTION_INTERSECTIONS_STATE);
-                return;
-            }
-            if (newVal && !ctrl_enable.isSelected()) {
-                workspace.setState(Workspace.SELECT_INTERSECTIONS_STATE);
-                return;
-            }
-            if (oldVal && ctrl_enable.isSelected()) {
-                workspace.setState(Workspace.ADD_TO_SELECTION_SINGLES_STATE);
-                return;
-            }
-            workspace.setState(Workspace.DEFAULT_STATE);
-        });
+    private void initElementsGUI() {
+        String [] elements = {
+                "Circle",
+                "Rectangle",
+                "Arc",
+                "Line",
+                "Polygon"
+        };
+        tool_element_list.getItems().addAll(elements);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        menu_save.setOnAction(this::onSave);
-        menu_exit.setOnAction(this::onExit);
-        main_pane.setOnMouseClicked(this::mouseClickedHandler);
-        scroll_pane.setOnKeyPressed(this::keyPressedHandler);
-        workspaceInit();
+        initElementsGUI();
     }
+
+    //    private void workspaceInit() {
+//        workspace = new Workspace(main_pane, tool_color, tool_radius);
+//        ctrl_enable.selectedProperty().addListener((observableValue, oldVal, newVal) -> {
+//            if (newVal && set_enable.isSelected()) {
+//                workspace.setState(Workspace.ADD_TO_SELECTION_INTERSECTIONS_STATE);
+//                return;
+//            }
+//            if (newVal && !set_enable.isSelected()) {
+//                workspace.setState(Workspace.ADD_TO_SELECTION_SINGLES_STATE);
+//                return;
+//            }
+//            if (oldVal && set_enable.isSelected()) {
+//                workspace.setState(Workspace.SELECT_INTERSECTIONS_STATE);
+//                return;
+//            }
+//            workspace.setState(Workspace.DEFAULT_STATE);
+//        });
+//        set_enable.selectedProperty().addListener((observableValue, oldVal, newVal) -> {
+//            if (newVal && ctrl_enable.isSelected()) {
+//                workspace.setState(Workspace.ADD_TO_SELECTION_INTERSECTIONS_STATE);
+//                return;
+//            }
+//            if (newVal && !ctrl_enable.isSelected()) {
+//                workspace.setState(Workspace.SELECT_INTERSECTIONS_STATE);
+//                return;
+//            }
+//            if (oldVal && ctrl_enable.isSelected()) {
+//                workspace.setState(Workspace.ADD_TO_SELECTION_SINGLES_STATE);
+//                return;
+//            }
+//            workspace.setState(Workspace.DEFAULT_STATE);
+//        });
+//    }
+//
+//    @Override
+//    public void initialize(URL url, ResourceBundle resourceBundle) {
+//        menu_save.setOnAction(this::onSave);
+//        menu_exit.setOnAction(this::onExit);
+//        main_pane.setOnMouseClicked(this::mouseClickedHandler);
+//        scroll_pane.setOnKeyPressed(this::keyPressedHandler);
+//        workspaceInit();
+//    }
 }
 

@@ -8,6 +8,6 @@ public class DefaultState implements WorkspaceState {
     @Override
     public boolean selectElement(PaneController paneController, MouseEvent mouseEvent) {
         paneController.deselectAll();
-        return paneController.selectOne(mouseEvent);
+        return paneController.selectOne(mouseEvent.getX(), mouseEvent.getY());
     }
 }

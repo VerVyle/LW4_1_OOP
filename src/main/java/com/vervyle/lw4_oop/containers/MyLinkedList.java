@@ -17,6 +17,29 @@ public class MyLinkedList<T> implements MyList<T> {
     }
 
     @Override
+    public T getLast() {
+        return last.value;
+    }
+
+    //    public MyLinkedList(MyLinkedList<T> myLinkedList) {
+//        Iterator<T> iterator = myLinkedList.iterator();
+//        iterator.forEachRemaining(this::add);
+//        size = myLinkedList.size();
+//    }
+//
+//    public MyLinkedList(MyList<T> myLinkedList) {
+//        Iterator<T> iterator = myLinkedList.iterator();
+//        iterator.forEachRemaining(this::add);
+//        size = myLinkedList.size();
+//    }
+
+
+    @Override
+    public void remove(MyList<T> toDelete) {
+        toDelete.iterator().forEachRemaining(this::remove);
+    }
+
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -153,5 +176,50 @@ public class MyLinkedList<T> implements MyList<T> {
                 next = next.next;
             }
         }
+    }
+
+    private class MyDescendingIterator implements Iterator<T> {
+        private Node<T> next;
+        private int nextIndex;
+
+        public MyDescendingIterator() {
+            next = (size == 0) ? null : last;
+            nextIndex = size - 1;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return next.prev != null;
+        }
+
+        @Override
+        public T next() {
+            if (next != null) {
+                Node<T> current = next;
+                next = next.prev;
+                nextIndex--;
+                return current.value;
+            }
+            return null;
+        }
+
+        @Override
+        public void remove() {
+            Iterator.super.remove();
+        }
+
+        @Override
+        public void forEachRemaining(Consumer<? super T> action) {
+            Objects.requireNonNull(action);
+            while (nextIndex >= 0) {
+                action.accept(next.value);
+                nextIndex--;
+                next = next.prev;
+            }
+        }
+    }
+
+    public Iterator<T> descendingIterator() {
+        return new MyDescendingIterator();
     }
 }

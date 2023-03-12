@@ -1,6 +1,5 @@
 package com.vervyle.lw4_oop.drawable;
 
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -28,11 +27,11 @@ public abstract class Element implements Drawable {
         shape.setStyle("-fx-stroke: #FF0000; -fx-stroke-width: 3px");
     }
 
-    public abstract boolean checkLocation(MouseEvent mouseEvent);
+    public abstract boolean checkLocation(double x, double y);
 
     @Override
-    public boolean select(MouseEvent mouseEvent) {
-        if (checkLocation(mouseEvent) && !isSelected) {
+    public boolean select(double x, double y) {
+        if (checkLocation(x, y) && !isSelected) {
             select();
             return true;
         }
@@ -45,12 +44,10 @@ public abstract class Element implements Drawable {
         shape.setStyle("-fx-stroke: #000000; -fx-stroke-width: 3px");
     }
 
-    @Override
     public void paint() {
         pane.getChildren().add(shape);
     }
 
-    @Override
     public void delete() {
         pane.getChildren().remove(shape);
     }

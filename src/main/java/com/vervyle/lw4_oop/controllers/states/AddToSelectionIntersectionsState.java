@@ -12,8 +12,8 @@ public class AddToSelectionIntersectionsState implements WorkspaceState {
         if (!mouseEvent.isControlDown()) {
             SELECT_INTERSECTIONS_STATE.selectElement(paneController, mouseEvent);
         }
-        boolean res = paneController.selectOne(mouseEvent);
-        paneController.selectAll(mouseEvent);
+        boolean res = paneController.selectOne(mouseEvent.getX(), mouseEvent.getY());
+        paneController.selectAll(mouseEvent.getX(), mouseEvent.getY());
         return res;
     }
 

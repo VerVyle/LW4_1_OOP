@@ -12,9 +12,13 @@ public interface MyList<T> {
 
     void add(T val, int where);
 
+    T getLast();
+
     void remove(T val);
 
     void remove(int where);
+
+    void remove(MyList<T> toDelete);
 
     Iterator<T> iterator();
 

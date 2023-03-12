@@ -1,6 +1,5 @@
 package com.vervyle.lw4_oop.drawable;
 
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -11,9 +10,9 @@ public class RRectangle extends Element {
     protected double length;
 
     @Override
-    public boolean checkLocation(MouseEvent mouseEvent) {
-        if (x <= mouseEvent.getX() + width / 2 && mouseEvent.getX() <= x + width / 2)
-            return y <= mouseEvent.getY() + length / 2 && mouseEvent.getY() <= y + length / 2;
+    public boolean checkLocation(double x, double y) {
+        if (this.x <= x + width / 2 && x <= this.x + width / 2)
+            return this.y <= y + length / 2 && y <= this.y + length / 2;
         return false;
     }
 

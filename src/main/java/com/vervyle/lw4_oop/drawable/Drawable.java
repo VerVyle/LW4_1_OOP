@@ -7,9 +7,5 @@ public interface Drawable {
 
     void deselect();
 
-    boolean select(MouseEvent mouseEvent);
-
-    void paint();
-
-    void delete();
+    boolean select(double x, double y);
 }
